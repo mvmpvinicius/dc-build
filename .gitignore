@@ -1,3 +1,11 @@
 # Ignore everything:
+*
 
 # Except the following directories:
+
+!build_examples/
+!build_examples/*
+!services/nginx_example/
+!services/nginx_example/*
+!services/web_example_flask/
+!services/web_example_flask/*
