@@ -1,0 +1,87 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>{% block title %}Project Example{% endblock %}</title>
+
+<!-- meta -->
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- /meta -->
+
+<!-- styles -->
+<link type="text/css" rel="stylesheet" href="/static/css/bootstrap-4.4.1.min.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/app.css" />
+<!-- /styles -->
+
+<!-- fonts -->
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+<!-- /fonts -->
+
+<!-- icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- /icons -->
+
+<!-- scripts -->
+<script type="text/javascript" src="/static/js/jquery-3.4.1.slim.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap-4.4.1.min.js"></script>
+<!-- /scripts -->
+</head>
+<body>
+    <!-- Wrap all page content here -->
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="/">Project Example</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="toggle">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    {% if current_user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbar_dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ current_user.name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar_dropdown">
+                                    <a class="dropdown-item" href="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
+                                    <form id="logout-form" action="/dashboard/logout" style="display: none;"></form>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <!-- Begin page content -->
+        <main id="content" role="main" class="container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-block alert-info fade in personalized">
+                            <a class="close" data-dismiss="alert">&times;</a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% block footer %}
+        <footer>
+            <div class="container">
+                <p>Project Example &copy; All Rights Reserved.</p>
+            </div>
+        </footer>
+    {% endblock %}
+</body>
+</html>

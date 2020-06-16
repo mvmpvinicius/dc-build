@@ -1,0 +1,10 @@
+footer {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.fade.personalized:not(.show) {
+    opacity: 80;
+}
